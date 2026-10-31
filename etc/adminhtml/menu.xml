@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Kkkonrad_ProductLabels::labels" title="Product labels" translate="title" module="Kkkonrad_ProductLabels"
+             sortOrder="40" parent="Magento_Catalog::inventory"
+             action="kkkonrad_productlabels/label/index" resource="Kkkonrad_ProductLabels::labels"/>
+    </menu>
+</config>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  Stock form container: Back / Reset / Delete (when editing) / Save, posting
+  #edit_form to */*/save and */*/delete. A child named `form` stops it
+  guessing a form class from a block group.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Backend\Block\Widget\Form\Container" name="kkkonrad.productlabels.edit">
+                <block class="Kkkonrad\ProductLabels\Block\Adminhtml\Label\Form" name="kkkonrad.productlabels.edit.form" as="form"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

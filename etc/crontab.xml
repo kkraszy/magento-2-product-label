@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- Catches what skips the product save event: imports, mass attribute updates, direct SQL -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="kkkonrad_productlabels_reindex" instance="Kkkonrad\ProductLabels\Model\Indexer" method="reindexAll">
+            <schedule>15 3 * * *</schedule>
+        </job>
+    </group>
+</config>

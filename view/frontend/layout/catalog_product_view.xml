@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+  Hyvä: `gallery.additional` is printed inside the gallery's `relative` wrapper,
+  so the labels sit over the main image. Luma has no such container and this
+  reference is skipped there.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="gallery.additional">
+            <block class="Magento\Catalog\Block\Product\View" name="kkkonrad.product.labels"
+                   template="Kkkonrad_ProductLabels::labels.phtml">
+                <arguments>
+                    <argument name="label_area" xsi:type="string">product</argument>
+                    <argument name="view_model" xsi:type="object">Kkkonrad\ProductLabels\Model\Labels</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

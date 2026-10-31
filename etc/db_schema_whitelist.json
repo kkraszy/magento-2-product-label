@@ -1,0 +1,46 @@
+{
+    "kkkonrad_product_label": {
+        "column": {
+            "label_id": true,
+            "name": true,
+            "is_active": true,
+            "priority": true,
+            "hide_if_higher": true,
+            "store_ids": true,
+            "customer_group_ids": true,
+            "from_date": true,
+            "to_date": true,
+            "text": true,
+            "position": true,
+            "shape": true,
+            "bg_color": true,
+            "text_color": true,
+            "show_on_listing": true,
+            "show_on_product": true,
+            "only_new": true,
+            "only_sale": true,
+            "stock_status": true,
+            "conditions_serialized": true
+        },
+        "index": {
+            "KKKONRAD_PRODUCT_LABEL_IS_ACTIVE_PRIORITY": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "kkkonrad_product_label_product": {
+        "column": {
+            "label_id": true,
+            "product_id": true
+        },
+        "index": {
+            "KKKONRAD_PRODUCT_LABEL_PRODUCT_LABEL_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "KKKONRAD_PRD_LBL_PRD_LBL_ID_KKKONRAD_PRD_LBL_LBL_ID": true,
+            "KKKONRAD_PRD_LBL_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
+    }
+}

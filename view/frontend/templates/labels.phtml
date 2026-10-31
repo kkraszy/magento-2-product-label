@@ -1,0 +1,33 @@
+<?php
+/**
+ * Labels over a product image. Listing: `labels` is handed in by
+ * Plugin\ProductImage. PDP: worked out here for the current product.
+ *
+ * Own `kk-` classes in web/css/labels.css, because Tailwind does not generate
+ * classes it only sees in a module. Colours were checked to be #rrggbb on save.
+ *
+ * `label_area`, not `area`: a block's `area` data is the design area its
+ * template is looked up in, and "listing" has no templates.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$area = (string)$block->getData('label_area');
+$labels = $block->getData('labels')
+    ?? $block->getData('view_model')->forProduct($block->getProduct(), $area);
+if (!$labels) {
+    return;
+}
+?>
+<div class="kk-labels kk-labels--<?= $escaper->escapeHtmlAttr($area) ?>">
+    <?php foreach ($labels as $position => $items): ?>
+        <div class="kk-labels__pos kk-labels__pos--<?= $escaper->escapeHtmlAttr($position) ?>">
+            <?php foreach ($items as $label): ?>
+                <span class="kk-label kk-label--<?= $escaper->escapeHtmlAttr($label['shape']) ?>"
+                      style="--kk-label-bg:<?= $escaper->escapeHtmlAttr($label['bg_color']) ?>;--kk-label-fg:<?= $escaper->escapeHtmlAttr($label['text_color']) ?>"
+                ><?= $escaper->escapeHtml($label['text']) ?></span>
+            <?php endforeach ?>
+        </div>
+    <?php endforeach ?>
+</div>

@@ -1,0 +1,74 @@
+/* em, not rem: Luma's root font-size is 10px (62.5%), Hyvä's is 16px */
+.kk-labels {
+    position: absolute;
+    inset: 0;
+    /*
+     * Above the card's hover image (z 1), level with its buttons and swatches
+     * (z 2), which come later in the DOM and so paint over a label in their way.
+     */
+    z-index: 2;
+    pointer-events: none;
+    font-size: .7em;
+}
+.kk-labels--product {
+    font-size: .85em;
+}
+.kk-labels__pos {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: .4em;
+    margin: .8em;
+}
+.kk-labels__pos--top-left,
+.kk-labels__pos--top-center,
+.kk-labels__pos--top-right { top: 0; }
+.kk-labels__pos--middle-left,
+.kk-labels__pos--middle-center,
+.kk-labels__pos--middle-right { top: 50%; translate: 0 -50%; }
+.kk-labels__pos--bottom-left,
+.kk-labels__pos--bottom-center,
+.kk-labels__pos--bottom-right { bottom: 0; }
+.kk-labels__pos--top-left,
+.kk-labels__pos--middle-left,
+.kk-labels__pos--bottom-left { inset-inline-start: 0; align-items: flex-start; }
+/*
+ * Hook for themes whose cards keep their own badges in this corner: the theme
+ * sets --kk-labels-top-left (in any layer) to where its badges end.
+ */
+.kk-labels__pos--top-left { margin-top: var(--kk-labels-top-left, .8em); }
+.kk-labels__pos--top-right,
+.kk-labels__pos--middle-right,
+.kk-labels__pos--bottom-right { inset-inline-end: 0; align-items: flex-end; }
+.kk-labels__pos--top-center,
+.kk-labels__pos--bottom-center { left: 50%; translate: -50% 0; align-items: center; }
+.kk-labels__pos--middle-center { left: 50%; translate: -50% -50%; align-items: center; }
+
+.kk-label {
+    display: inline-block;
+    padding: .45em .8em;
+    border-radius: .25em;
+    background: var(--kk-label-bg);
+    color: var(--kk-label-fg);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.kk-label--pill {
+    border-radius: 999px;
+}
+.kk-label--circle {
+    display: grid;
+    place-items: center;
+    width: 4.2em;
+    aspect-ratio: 1;
+    padding: .4em;
+    border-radius: 50%;
+    white-space: normal;
+    text-align: center;
+}
+.kk-label--square {
+    border-radius: 0;
+}

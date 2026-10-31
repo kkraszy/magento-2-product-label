@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="kkkonrad_product_label" resource="default" engine="innodb" comment="Product labels">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="true"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Admin only"/>
+        <column xsi:type="smallint" name="is_active" unsigned="true" nullable="false" default="1"/>
+        <column xsi:type="smallint" name="priority" nullable="false" default="0" comment="Lower shows first"/>
+        <column xsi:type="smallint" name="hide_if_higher" unsigned="true" nullable="false" default="0"
+                comment="Skip when a higher-priority label is already shown"/>
+        <column xsi:type="varchar" name="store_ids" length="255" nullable="false" default="0" comment="CSV, 0 = all"/>
+        <column xsi:type="varchar" name="customer_group_ids" length="255" nullable="false" default="" comment="CSV, empty = all"/>
+        <column xsi:type="date" name="from_date" nullable="true"/>
+        <column xsi:type="date" name="to_date" nullable="true"/>
+        <column xsi:type="varchar" name="text" length="255" nullable="false" comment="May hold {SAVE_PERCENT} etc."/>
+        <column xsi:type="varchar" name="position" length="16" nullable="false" default="top-left"/>
+        <column xsi:type="varchar" name="shape" length="16" nullable="false" default="rectangle"/>
+        <column xsi:type="varchar" name="bg_color" length="7" nullable="false" default="#d0021b"/>
+        <column xsi:type="varchar" name="text_color" length="7" nullable="false" default="#ffffff"/>
+        <column xsi:type="smallint" name="show_on_listing" unsigned="true" nullable="false" default="1"/>
+        <column xsi:type="smallint" name="show_on_product" unsigned="true" nullable="false" default="1"/>
+        <column xsi:type="smallint" name="only_new" unsigned="true" nullable="false" default="0"/>
+        <column xsi:type="smallint" name="only_sale" unsigned="true" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="stock_status" length="3" nullable="true" comment="in / out / null = any"/>
+        <column xsi:type="text" name="conditions_serialized" nullable="true" comment="Catalog price rule conditions, JSON"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="label_id"/>
+        </constraint>
+        <index referenceId="KKKONRAD_PRODUCT_LABEL_IS_ACTIVE_PRIORITY" indexType="btree">
+            <column name="is_active"/>
+            <column name="priority"/>
+        </index>
+    </table>
+    <!-- Products matching a label's conditions. Labels without conditions match everything and have no rows here. -->
+    <table name="kkkonrad_product_label_product" resource="default" engine="innodb" comment="Product label condition index">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="product_id"/>
+            <column name="label_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="KKKONRAD_PRD_LBL_PRD_LBL_ID_KKKONRAD_PRD_LBL_LBL_ID"
+                    table="kkkonrad_product_label_product" column="label_id"
+                    referenceTable="kkkonrad_product_label" referenceColumn="label_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="KKKONRAD_PRD_LBL_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID"
+                    table="kkkonrad_product_label_product" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="KKKONRAD_PRODUCT_LABEL_PRODUCT_LABEL_ID" indexType="btree">
+            <column name="label_id"/>
+        </index>
+    </table>
+</schema>

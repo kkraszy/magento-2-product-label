@@ -1,7 +1,7 @@
 # Kkkonrad_ProductLabels
 
 Product labels ("Nowość", "-20%", "Ostatnie sztuki"...) over product images on
-listings and the product page. Modelled on Amasty Product Labels, but smaller:
+listings and the product page. Kept small:
 text labels in four shapes, nine positions, rule conditions, scheduling.
 
 Works under every Hyvä port here with no template overrides. Listings also
@@ -67,7 +67,7 @@ Test: `vendor/bin/phpunit app/code/Kkkonrad/ProductLabels/Test/Unit`
 | 4 | **-{SAVE_PERCENT}%** | only discounted products | PDP only (theme cards have their own sale badge) | top-right, red circle |
 | 11 | **Cena hurtowa** | every product, Wholesale customer group only | PDP only | bottom-left, blue |
 
-## Not included (compared with Amasty)
+## Not included
 
 - Image labels (uploaded PNG/SVG). Text and shape only.
 - Separate text and look for listing vs product page. One label, two switches.

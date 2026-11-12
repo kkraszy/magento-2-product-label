@@ -22,7 +22,11 @@ class Actions extends Column
 
     public function prepareDataSource(array $dataSource): array
     {
-        foreach ($dataSource['data']['items'] ?? [] as &$item) {
+        if (empty($dataSource['data']['items'])) {
+            return $dataSource;
+        }
+        // Not `?? []`: that yields a copy, and the by-reference loop would edit the copy
+        foreach ($dataSource['data']['items'] as &$item) {
             $item[$this->getData('name')]['edit'] = [
                 'href' => $this->url->getUrl('kkkonrad_productlabels/label/edit', ['id' => $item['label_id']]),
                 'label' => __('Edit'),
